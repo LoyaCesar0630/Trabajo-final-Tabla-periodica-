@@ -1,0 +1,473 @@
+:root {
+  --bg-color: #f4f6f9;
+  --card-radius: 4px;
+  
+  /* Colores de categorías */
+  --c-gases-nobles: #0c582a;
+  --c-halogenos: #82b436;
+  --c-no-metales: #e85d04;
+  --c-metaloides: #800040;
+  --c-otros-metales: #4a154b;
+  --c-transicion: #0077c8;
+  --c-alcalinoterreos: #ebb000;
+  --c-alcalinos: #0e2a47;
+  --c-lantanidos: #cbdd78;
+  --c-actinidos: #5b9e73;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: #1e293b;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 1280px;
+}
+
+header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: #0f172a;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Indicador de Grupos y Períodos */
+.table-info-banner {
+  background: #e2e8f0;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #334155;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Controles de Búsqueda */
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 9px 16px;
+  border-radius: 20px;
+  border: 2px solid #cbd5e1;
+  outline: none;
+  font-size: 0.95rem;
+  width: 320px;
+  transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+
+.reset-btn {
+  padding: 9px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.reset-btn:hover {
+  background: #334155;
+}
+
+/* Contenedor Principal de la Tabla Periódica */
+.table-container {
+  position: relative;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 1350px;
+  overflow-x: auto;
+}
+
+/* Grid Completo de Tabla Periódica Real (18 Columnas x 11 Filas) */
+.grid {
+  display: grid;
+  grid-template-columns: 40px repeat(18, minmax(62px, 1fr));
+  grid-template-rows: 30px repeat(10, minmax(66px, 1fr));
+  gap: 3px;
+}
+
+.col-header, .row-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  user-select: none;
+}
+
+/* Estilo de Tarjeta de Elemento */
+.element-card {
+  border: none;
+  border-radius: var(--card-radius);
+  padding: 3px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.element-card:hover {
+  transform: scale(1.22);
+  z-index: 30;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  outline: 2px solid #ffffff;
+}
+
+.element-card.dimmed {
+  opacity: 0.15;
+  filter: grayscale(90%);
+  transform: scale(0.95);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-symbol {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+  margin: 1px 0;
+}
+
+.card-name {
+  font-size: 0.58rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Colores de Categorías de la Tabla */
+.gases-nobles { background-color: var(--c-gases-nobles); }
+.halogenos { background-color: var(--c-halogenos); color: #1e293b; }
+.no-metales { background-color: var(--c-no-metales); }
+.metaloides { background-color: var(--c-metaloides); }
+.otros-metales { background-color: var(--c-otros-metales); }
+.transicion { background-color: var(--c-transicion); }
+.alcalinoterreos { background-color: var(--c-alcalinoterreos); color: #1e293b; }
+.alcalinos { background-color: var(--c-alcalinos); }
+.lantanidos { background-color: var(--c-lantanidos); color: #1e293b; }
+.actinidos { background-color: var(--c-actinidos); }
+
+/* Área Central Explicativa y Leyenda */
+.center-info-area {
+  grid-column: 4 / 14;
+  grid-row: 2 / 5;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  padding: 10px;
+  align-items: center;
+}
+
+.sample-diagram {
+  position: relative;
+  background: var(--c-no-metales);
+  color: white;
+  border-radius: 6px;
+  padding: 15px;
+  width: 190px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(230, 93, 4, 0.3);
+}
+
+.sample-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.sample-symbol {
+  font-size: 3.2rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1;
+}
+
+.sample-name {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.sample-annotation {
+  position: absolute;
+  font-size: 0.72rem;
+  color: #334155;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.anno-num { left: -110px; top: 12px; }
+.anno-num::after { content: ''; display: inline-block; width: 35px; height: 1px; background: #64748b; margin-left: 5px; }
+
+.anno-sym { left: -110px; top: 55px; }
+.anno-sym::after { content: ''; display: inline-block; width: 35px; height: 1px; background: #64748b; margin-left: 5px; }
+
+.anno-mass { right: -95px; top: 12px; }
+.anno-mass::before { content: ''; display: inline-block; width: 35px; height: 1px; background: #64748b; margin-right: 5px; }
+
+.anno-name { right: -75px; bottom: 15px; }
+.anno-name::before { content: ''; display: inline-block; width: 35px; height: 1px; background: #64748b; margin-right: 5px; }
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 15px;
+  background: #f8fafc;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.legend-item:hover {
+  background: #e2e8f0;
+}
+
+.legend-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Modal Interactivo Completo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: white;
+  width: 580px;
+  max-height: 90vh;
+  border-radius: 16px;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.modal-overlay.active .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header-banner {
+  padding: 25px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.modal-header-banner .big-symbol {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.modal-header-banner .header-info {
+  text-align: right;
+}
+
+.modal-header-banner .header-info h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.modal-body {
+  padding: 22px 25px;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.info-item {
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.info-item span.label {
+  display: block;
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.info-item span.val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.element-applications {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #065f46;
+  background: #ecfdf5;
+  border-left: 4px solid #10b981;
+  padding: 12px 15px;
+  border-radius: 0 8px 8px 0;
+  font-weight: 600;
+}
+
+.element-description {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #334155;
+  background: #f1f5f9;
+  border-left: 4px solid #0284c7;
+  padding: 12px 15px;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Pie de Página de Referencias */
+.references-footer {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1350px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-top: 3px solid #0f172a;
+}
+
+.references-footer h3 {
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.references-footer ul {
+  list-style: none;
+  font-size: 0.88rem;
+  color: #475569;
+}
+
+.references-footer li {
+  margin-bottom: 6px;
+}

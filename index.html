@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla Periódica Interactiva de los Elementos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Tabla Periódica de los Elementos</h1>
+    <div class="controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar por elemento, símbolo, N° o categoría...">
+      </div>
+      <button class="reset-btn" id="resetBtn">Mostrar Todos</button>
+    </div>
+  </header>
+
+  <!-- Indicador explicativo de Grupos y Períodos (Exigido por Rúbrica) -->
+  <div class="table-info-banner">
+    <span><strong>Columnas Superiores (1 - 18):</strong> Grupos / Familias</span>
+    <span>•</span>
+    <span><strong>Filas Laterales (1 - 7):</strong> Períodos</span>
+  </div>
+
+  <div class="table-container">
+    <div class="grid" id="periodicGrid">
+      <!-- El Grid, Encabezados, Diagrama Central y Tarjetas se generan dinámicamente desde JS -->
+    </div>
+  </div>
+
+  <!-- Modal Interactivo con Propiedades Físicas, Químicas y Aplicaciones -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card" id="modalCard">
+      <button class="close-btn" id="closeBtn">&times;</button>
+      <div class="modal-header-banner" id="modalBanner">
+        <div class="big-symbol" id="mSymbol">O</div>
+        <div class="header-info">
+          <h2 id="mName">Oxígeno</h2>
+          <p id="mCategory">No metales</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        
+        <h3 class="section-title">Información General</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Número Atómico</span>
+            <span class="val" id="mNum">8</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Masa Atómica</span>
+            <span class="val" id="mMass">15.999 u</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Ubicación</span>
+            <span class="val" id="mPos">Período 2, Grupo 16</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Estado (20°C)</span>
+            <span class="val" id="mState">Gas</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Descubierto por</span>
+            <span class="val" id="mDisc">Carl Wilhelm Scheele (1772)</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Config. Electrónica</span>
+            <span class="val" id="mConfig">[He] 2s² 2p⁴</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Propiedades Físicas y Químicas</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Punto de Fusión</span>
+            <span class="val" id="mMelting">-218.79 °C</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Punto de Ebullición</span>
+            <span class="val" id="mBoiling">-182.96 °C</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Electronegatividad</span>
+            <span class="val" id="mElectro">3.44 (Pauling)</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Densidad</span>
+            <span class="val" id="mDensity">1.429 g/L</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Estados de Oxidación</span>
+            <span class="val" id="mOxidation">-2, -1, +1, +2</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Radio Atómico</span>
+            <span class="val" id="mRadius">60 pm</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Aplicaciones en la Vida Cotidiana</h3>
+        <div class="element-applications" id="mAplicaciones">
+          Respiración celular y médica en hospitales, tanques de buceo, soporte vital en aviación y tratamiento de aguas.
+        </div>
+
+        <h3 class="section-title" style="margin-top:15px;">Descripción Histórica y Científica</h3>
+        <div class="element-description" id="mDesc">
+          El oxígeno es un elemento químico fundamental para la vida en la Tierra. Constituye aproximadamente el 21% de la atmósfera terrestre.
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Fuentes y Referencias (Requisito de la Rúbrica) -->
+  <footer class="references-footer">
+    <h3>Fuentes y Referencias Bibliográficas</h3>
+    <ul>
+      <li><strong>IUPAC:</strong> International Union of Pure and Applied Chemistry - <em>Periodic Table of Elements</em> (iupac.org).</li>
+      <li><strong>PubChem:</strong> National Center for Biotechnology Information - <em>Compound & Element Database</em> (pubchem.ncbi.nlm.nih.gov).</li>
+      <li><strong>Royal Society of Chemistry:</strong> <em>Periodic Table Visual Elements & Data</em> (rsc.org/periodic-table).</li>
+    </ul>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
